@@ -8,3 +8,9 @@ export const CoinsListService = (params: Record<string, string | number>) => {
     method: "GET",
   });
 };
+
+export const ViewCoinsService = (id: string) => {
+  return fetch(`${BASE_URL}coins/${id}`, {
+    method: "GET",
+  });
+};

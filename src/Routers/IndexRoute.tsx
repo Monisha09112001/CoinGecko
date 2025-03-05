@@ -9,7 +9,7 @@ export const IndexRoute = [
     children: [
       { path: "/", element: <CoinsList />, index: true },
       {
-        path: "coinViewpage",
+        path: "coinviewpage",
         element: <CoinViewPage />,
       },
       {

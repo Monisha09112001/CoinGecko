@@ -1,0 +1,59 @@
+/* Fade-in animation for each item */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation with a staggered delay */
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Styling for each coin box */
+.itemBox {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Hover effect */
+.itemBox:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Item detail styling */
+.itemDetail {
+  margin-bottom: 8px;
+}
+
+/* Image container styling */
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.image {
+  max-width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Text styling */
+.text {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}

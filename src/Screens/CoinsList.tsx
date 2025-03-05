@@ -1,45 +1,69 @@
 import { useEffect, useState } from "react";
 import { CoinsListService } from "../Services/ApiServices";
 import { CoinListProps } from "../Types/General";
+import RenderItem from "../Components/RenderItem";
+import { useNavigate } from "react-router";
+import Loader from "../Components/Loader";
 
+var isMount = true;
 export default function CoinsList() {
   const [coinList, setCoinList] = useState<CoinListProps>({
     data: [],
   });
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getCoinsList();
-  }, []);
+  }, [isMount]);
 
-  const getCoinsList = () => {
+  const getCoinsList = (size = 10) => {
     let finalOBJ = {
       vs_currency: "EUR",
       order: "market_cap_desc",
-      per_page: 10,
+      per_page: size,
     };
 
     CoinsListService(finalOBJ)
       .then((res) => res.json()) // Convert response to JSON
       .then((data) => {
-        console.log(data, "res");
-        setCoinList({ data: data });
+        const SortedCoins = data?.sort(
+          (a: any, b: any) => a.market_cap - b.market_cap
+        );
+        setCoinList({ data: SortedCoins });
       })
-      .catch((err) => {
-        console.log(err, "err");
-      })
+      .catch((err) => {})
       .finally(() => {
-        console.log("completed");
+        setLoading(false);
       });
   };
 
-  console.log(coinList, "coinList");
-
   return (
     <>
-      <section>
-        <div>
-          <p>dhsj</p>
-        </div>
-      </section>
+      <Loader loading={loading} />
+      <RenderItem
+        handleClickitem={(id: string) => {
+          navigate("coinviewpage", { state: { itemid: id } });
+        }}
+        callNextPage={(size: number) => getCoinsList(size)}
+        datalist={coinList.data}
+        keys={[
+          "image",
+          "name",
+          "symbol",
+          "current_price",
+          "high_24h",
+          "low_24h",
+        ]}
+        keyName={{
+          image: "Image",
+          name: "Name",
+          symbol: "Symbol",
+          current_price: "CurrentPrice",
+          high_24h: "High in 24h",
+          low_24h: "Low in 24h",
+        }}
+      />
     </>
   );
 }

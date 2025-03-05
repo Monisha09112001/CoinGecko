@@ -1,0 +1,54 @@
+/* Page Fade-in Effect */
+.fadeIn {
+  animation: fadeInAnimation 0.6s ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Heading Styling */
+.heading {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Coin Detail Row */
+.detailRow {
+  background: #f8f9fa;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Market Cap Section */
+.marketCapTitle {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.marketCapContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.marketCapItem {
+  background: #e9ecef;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+}
