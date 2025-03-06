@@ -4,6 +4,7 @@ import { CoinListProps } from "../Types/General";
 import RenderItem from "../Components/RenderItem";
 import { useNavigate } from "react-router";
 import Loader from "../Components/Loader";
+import { ErrorMsg, Toast } from "../Utilities/Toast";
 
 var isMount = true;
 export default function CoinsList() {
@@ -28,11 +29,17 @@ export default function CoinsList() {
       .then((res) => res.json()) // Convert response to JSON
       .then((data) => {
         const SortedCoins = data?.sort(
-          (a: any, b: any) => a.market_cap - b.market_cap
+          (a: any, b: any) => b.market_cap - a.market_cap
         );
-        setCoinList({ data: SortedCoins });
+        setCoinList({
+          data: SortedCoins?.map((ele: any) => {
+            return { ...ele, status: false };
+          }),
+        });
       })
-      .catch((err) => {})
+      .catch((err) => {
+        Toast.fail(ErrorMsg);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -41,11 +48,15 @@ export default function CoinsList() {
   return (
     <>
       <Loader loading={loading} />
+
       <RenderItem
         handleClickitem={(id: string) => {
           navigate("coinviewpage", { state: { itemid: id } });
         }}
-        callNextPage={(size: number) => getCoinsList(size)}
+        handleRetryListApi={() => getCoinsList()}
+        UpdateDataList={(dataList: any) => {
+          setCoinList({ data: dataList });
+        }}
         datalist={coinList.data}
         keys={[
           "image",
@@ -55,13 +66,13 @@ export default function CoinsList() {
           "high_24h",
           "low_24h",
         ]}
-        keyName={{
+        LabelName={{
           image: "Image",
           name: "Name",
           symbol: "Symbol",
-          current_price: "CurrentPrice",
-          high_24h: "High in 24h",
-          low_24h: "Low in 24h",
+          current_price: "Current Price",
+          high_24h: "High 24-hour Price",
+          low_24h: "Low 24-hour Price",
         }}
       />
     </>
