@@ -1,14 +1,8 @@
-import { Icons } from "../Utilities/Icons";
+import { Icons } from "../../Utilities/Icons";
 import styles from "./NoDataFound.module.css";
 
-export default function NoDataFound({
-  items,
-  onClick,
-}: {
-  items: any;
-  onClick: () => void;
-}) {
-  return !items || items.length === 0 ? (
+export default function NoDataFound({ onClick }: { onClick: () => void }) {
+  return (
     <div
       style={{
         display: "flex",
@@ -30,5 +24,5 @@ export default function NoDataFound({
         </button>
       </div>
     </div>
-  ) : null;
+  );
 }

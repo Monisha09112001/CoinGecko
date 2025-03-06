@@ -15,8 +15,6 @@
   }
 }
 
-
-
 /* Coin Detail Row */
 .detailRow {
   background: #f8f9fa;
@@ -34,8 +32,6 @@
 }
 
 .marketCapContainer {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 

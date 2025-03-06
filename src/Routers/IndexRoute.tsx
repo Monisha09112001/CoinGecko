@@ -12,10 +12,7 @@ export const IndexRoute = [
         path: "coinviewpage",
         element: <CoinViewPage />,
       },
-      {
-        path: "*",
-        errorElement: <PageNotFound />,
-      },
     ],
+    errorElement: <PageNotFound />,
   },
 ];
